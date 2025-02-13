@@ -1,0 +1,43 @@
+{
+    "FixedFileInfo": {
+        "FileVersion": {
+            "Major": 0,
+            "Minor": 0,
+            "Patch": 1,
+            "Build": 20250211
+        },
+        "ProductVersion": {
+            "Major": 0,
+            "Minor": 0,
+            "Patch": 1,
+            "Build": 20250211
+        },
+        "FileFlagsMask": "3f",
+        "FileFlags ": "00",
+        "FileOS": "040004",
+        "FileType": "01",
+        "FileSubType": "00"
+    },
+    "StringFileInfo": {
+        "Comments": "",
+        "CompanyName": "",
+        "FileDescription": "One-click Network Entry for Privileged Access to Shared Services",
+        "FileVersion": "0.0.1.20250211",
+        "InternalName": "ONEPASS",
+        "LegalCopyright": "",
+        "LegalTrademarks": "",
+        "OriginalFilename": "ONEPASS",
+        "PrivateBuild": "",
+        "ProductVersion": "0.0.1.20250211",
+        "ProductName": "ONEPASS",
+        "SpecialBuild": ""
+    },
+    "VarFileInfo": {
+        "Translation": {
+            "LangID": "0809",
+            "CharsetID": "04B0"
+        }
+    },
+    "IconPath": "logo.ico",
+    "ManifestPath": "onepass.manifest"
+}
