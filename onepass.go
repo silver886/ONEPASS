@@ -9,13 +9,6 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-const (
-	toolName    = "ONEPASS"
-	toolVersion = "1.0.0"
-
-	toolTitle = toolName + " " + toolVersion
-)
-
 func main() {
 	// Set logger prefix
 	logMain := log.WithField("prefix", "main")

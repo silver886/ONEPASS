@@ -1,5 +1,5 @@
 $projectName = 'ONEPASS'
-$projectVersion = '1.0.0'
+$projectVersion = '1.1.0'
 
 $gui = $false
 $pack = $false
@@ -18,18 +18,18 @@ dotenvx get --overload --strict -f .\.env.mapleridge --format=eval | ForEach-Obj
 
 if ($gui) {
     if ($pack) {
-        packr build -o "$outputName.exe" -ldflags="-H=windowsgui -s -w -X main.defaultCloudflaredVersion=$CLOUDFLARED_VERSION -X main.defaultRemote=$REMOTE -X main.defaultLocal=$LOCAL"
+        packr build -o "$outputName.exe" -ldflags="-H=windowsgui -s -w -X main.toolName=$projectName -X main.toolVersion=$projectVersion -X main.defaultCloudflaredVersion=$CLOUDFLARED_VERSION -X main.defaultRemote=$REMOTE -X main.defaultLocal=$LOCAL"
     }
     else {
-        go build -o "$outputName.exe" -ldflags="-H=windowsgui -s -w -X main.defaultCloudflaredVersion=$CLOUDFLARED_VERSION -X main.defaultRemote=$REMOTE -X main.defaultLocal=$LOCAL"
+        go build -o "$outputName.exe" -ldflags="-H=windowsgui -s -w -X main.toolName=$projectName -X main.toolVersion=$projectVersion -X main.defaultCloudflaredVersion=$CLOUDFLARED_VERSION -X main.defaultRemote=$REMOTE -X main.defaultLocal=$LOCAL"
     }
 }
 else {
     if ($pack) {
-        packr build -o "$outputName.exe" -ldflags="-s -w -X main.defaultCloudflaredVersion=$CLOUDFLARED_VERSION -X main.defaultRemote=$REMOTE -X main.defaultLocal=$LOCAL"
+        packr build -o "$outputName.exe" -ldflags="-s -w -X main.toolName=$projectName -X main.toolVersion=$projectVersion -X main.defaultCloudflaredVersion=$CLOUDFLARED_VERSION -X main.defaultRemote=$REMOTE -X main.defaultLocal=$LOCAL"
     }
     else {
-        go build -o "$outputName.exe" -ldflags="-s -w -X main.defaultCloudflaredVersion=$CLOUDFLARED_VERSION -X main.defaultRemote=$REMOTE -X main.defaultLocal=$LOCAL"
+        go build -o "$outputName.exe" -ldflags="-s -w -X main.toolName=$projectName -X main.toolVersion=$projectVersion -X main.defaultCloudflaredVersion=$CLOUDFLARED_VERSION -X main.defaultRemote=$REMOTE -X main.defaultLocal=$LOCAL"
     }
 }
 

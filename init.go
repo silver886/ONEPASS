@@ -29,6 +29,10 @@ var (
 	defaultCloudflaredVersion string
 	defaultRemote             string
 	defaultLocal              string
+
+	toolName    string
+	toolVersion string
+	toolTitle   string = toolName + " " + toolVersion
 )
 
 func init() {
