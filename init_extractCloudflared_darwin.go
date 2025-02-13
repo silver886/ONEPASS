@@ -40,6 +40,9 @@ func initExtractCloudflared(archivePath string) {
 				} else if err = tempFile.Close(); err != nil {
 					logInitExtractCloudflared.WithError(err).Errorln("Cannot close file")
 					exit(35)
+				} else if err := os.Chmod(tempFile.Name(), 0755); err != nil {
+					logInitExtractCloudflared.WithError(err).Errorln("Cannot set file mode")
+					exit(35)
 				} else {
 					cloudflaredPath = tempFile.Name()
 				}
