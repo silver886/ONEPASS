@@ -11,6 +11,10 @@ import (
 	prefixed "github.com/x-cray/logrus-prefixed-formatter"
 )
 
+const (
+	separator string = ","
+)
+
 var (
 	log      *logger.Logger
 	debugLog *bytes.Buffer
@@ -27,8 +31,6 @@ var (
 	defaultCloudflareZeroOrganization string
 	defaultRemote                     string
 	defaultLocal                      string
-
-	separator string = ","
 )
 
 func init() {
