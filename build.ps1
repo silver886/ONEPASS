@@ -1,5 +1,5 @@
 $projectName = 'ONEPASS'
-$projectVersion = '1.1.1'
+$projectVersion = '1.1.2'
 
 $gui = $false
 $pack = $false
