@@ -18,18 +18,18 @@ dotenvx get --overload --strict -f .\.env.mapleridge --format=eval | ForEach-Obj
 
 if ($gui) {
     if ($pack) {
-        packr build -o "$outputName.exe" -ldflags="-H=windowsgui -s -w -X main.defaultCloudflaredVersion=$CLOUDFLARED_VERSION -X main.defaultCloudflareZeroOrganization=$CLOUDFLARE_ZERO_ORGANIZATION -X main.defaultRemote=$REMOTE -X main.defaultLocal=$LOCAL"
+        packr build -o "$outputName.exe" -ldflags="-H=windowsgui -s -w -X main.defaultCloudflaredVersion=$CLOUDFLARED_VERSION -X main.defaultRemote=$REMOTE -X main.defaultLocal=$LOCAL"
     }
     else {
-        go build -o "$outputName.exe" -ldflags="-H=windowsgui -s -w -X main.defaultCloudflaredVersion=$CLOUDFLARED_VERSION -X main.defaultCloudflareZeroOrganization=$CLOUDFLARE_ZERO_ORGANIZATION -X main.defaultRemote=$REMOTE -X main.defaultLocal=$LOCAL"
+        go build -o "$outputName.exe" -ldflags="-H=windowsgui -s -w -X main.defaultCloudflaredVersion=$CLOUDFLARED_VERSION -X main.defaultRemote=$REMOTE -X main.defaultLocal=$LOCAL"
     }
 }
 else {
     if ($pack) {
-        packr build -o "$outputName.exe" -ldflags="-s -w -X main.defaultCloudflaredVersion=$CLOUDFLARED_VERSION -X main.defaultCloudflareZeroOrganization=$CLOUDFLARE_ZERO_ORGANIZATION -X main.defaultRemote=$REMOTE -X main.defaultLocal=$LOCAL"
+        packr build -o "$outputName.exe" -ldflags="-s -w -X main.defaultCloudflaredVersion=$CLOUDFLARED_VERSION -X main.defaultRemote=$REMOTE -X main.defaultLocal=$LOCAL"
     }
     else {
-        go build -o "$outputName.exe" -ldflags="-s -w -X main.defaultCloudflaredVersion=$CLOUDFLARED_VERSION -X main.defaultCloudflareZeroOrganization=$CLOUDFLARE_ZERO_ORGANIZATION -X main.defaultRemote=$REMOTE -X main.defaultLocal=$LOCAL"
+        go build -o "$outputName.exe" -ldflags="-s -w -X main.defaultCloudflaredVersion=$CLOUDFLARED_VERSION -X main.defaultRemote=$REMOTE -X main.defaultLocal=$LOCAL"
     }
 }
 

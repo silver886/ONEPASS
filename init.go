@@ -20,24 +20,21 @@ var (
 	debugLog *bytes.Buffer
 
 	arg struct {
-		Debug                      bool
-		CloudflaredVersion         string
-		CloudflareZeroOrganization string
-		Remote                     string
-		Local                      string
+		Debug              bool
+		CloudflaredVersion string
+		Remote             string
+		Local              string
 	}
 
-	defaultCloudflaredVersion         string
-	defaultCloudflareZeroOrganization string
-	defaultRemote                     string
-	defaultLocal                      string
+	defaultCloudflaredVersion string
+	defaultRemote             string
+	defaultLocal              string
 )
 
 func init() {
 	// Define arguments
 	flag.BoolVar(&arg.Debug, "debug", false, "Enable debug mode")
 	flag.StringVar(&arg.CloudflaredVersion, "cloudflaredVersion", defaultCloudflaredVersion, "Cloudflared version")
-	flag.StringVar(&arg.CloudflareZeroOrganization, "cloudflareZeroOrganization", defaultCloudflareZeroOrganization, "Cloudflare Zero organization name")
 	flag.StringVar(&arg.Remote, "remote", defaultRemote, "Remote host")
 	flag.StringVar(&arg.Local, "local", defaultLocal, "Local listening port")
 
@@ -84,11 +81,10 @@ func initPost() {
 	}
 
 	logInitPost.WithFields(logrus.Fields{
-		"debug":                        arg.Debug,
-		"cloudflared_version":          arg.CloudflaredVersion,
-		"cloudflare_zero_organization": arg.CloudflareZeroOrganization,
-		"remote":                       arg.Remote,
-		"local":                        arg.Local,
+		"debug":               arg.Debug,
+		"cloudflared_version": arg.CloudflaredVersion,
+		"remote":              arg.Remote,
+		"local":               arg.Local,
 	}).Debugln("Command arguments")
 
 	// Setup exit signal handler
@@ -99,10 +95,6 @@ func initPost() {
 	logInitPost.Infoln("Check argument . . .")
 	if arg.CloudflaredVersion == "" {
 		logInitPost.Errorln("Argument `cloudflaredVersion` should not be empty")
-		exit(1)
-	}
-	if arg.CloudflareZeroOrganization == "" {
-		logInitPost.Errorln("Argument `cloudflareZeroOrganization` should not be empty")
 		exit(1)
 	}
 	if arg.Remote == "" {
