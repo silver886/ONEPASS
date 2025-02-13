@@ -114,13 +114,17 @@ func initPost() {
 	logInitPost.Infoln("Create working directory . . .")
 	initWorkdir()
 
-	// Download Cloudflared
-	logInitPost.Infoln("Download Cloudflared . . .")
+	// Download cloudflared
+	logInitPost.Infoln("Download cloudflared . . .")
 	initDownloadCloudflared()
 
-	// Extract Cloudflared
-	logInitPost.Infoln("Extract Cloudflared . . .")
+	// Extract cloudflared
+	logInitPost.Infoln("Extract cloudflared . . .")
 	initExtractCloudflared(cloudflaredPath)
+
+	// Cleanup cloudflared
+	logInitPost.Infoln("Cleanup cloudflared . . .")
+	initCleanupCloudflared()
 
 	// Finish initialization
 	logInitPost.Infoln("Finish initialization . . .")
