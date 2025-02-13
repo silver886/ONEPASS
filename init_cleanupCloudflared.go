@@ -18,6 +18,12 @@ func initCleanupCloudflared() {
 	if configPath, err := homedir.Expand("~/.cloudflared"); err != nil {
 		logInitCleanupCloudflared.WithError(err).Errorln("Cannot compose config path")
 		exit(35)
+	} else if _, err := os.Stat(configPath); os.IsNotExist(err) {
+		logInitCleanupCloudflared.WithError(err).Infoln("No need to cleanup")
+		return
+	} else if err != nil {
+		logInitCleanupCloudflared.WithError(err).Errorln("Cannot find config path")
+		exit(36)
 	} else if err := filepath.Walk(configPath, func(path string, info fs.FileInfo, err error) error {
 		if !info.IsDir() && strings.HasSuffix(info.Name(), "-token.lock") {
 			logInitCleanupCloudflared.Debugln(path)
