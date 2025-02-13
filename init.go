@@ -126,6 +126,10 @@ func initPost() {
 	logInitPost.Infoln("Download Cloudflared . . .")
 	initDownloadCloudflared()
 
+	// Extract Cloudflared
+	logInitPost.Infoln("Extract Cloudflared . . .")
+	initExtractCloudflared(cloudflaredPath)
+
 	// Finish initialization
 	logInitPost.Infoln("Finish initialization . . .")
 }
