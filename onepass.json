@@ -1,16 +1,16 @@
 {
     "FixedFileInfo": {
         "FileVersion": {
-            "Major": 0,
+            "Major": 1,
             "Minor": 0,
-            "Patch": 1,
-            "Build": 20250211
+            "Patch": 0,
+            "Build": 20250212
         },
         "ProductVersion": {
-            "Major": 0,
+            "Major": 1,
             "Minor": 0,
-            "Patch": 1,
-            "Build": 20250211
+            "Patch": 0,
+            "Build": 20250212
         },
         "FileFlagsMask": "3f",
         "FileFlags ": "00",
@@ -22,14 +22,14 @@
         "Comments": "",
         "CompanyName": "",
         "FileDescription": "One-click Network Entry for Privileged Access to Shared Services",
-        "FileVersion": "0.0.1.20250211",
+        "FileVersion": "1.0.0.20250212",
         "InternalName": "ONEPASS",
         "LegalCopyright": "",
         "LegalTrademarks": "",
         "OriginalFilename": "ONEPASS",
         "PrivateBuild": "",
-        "ProductVersion": "0.0.1.20250211",
         "ProductName": "ONEPASS",
+        "ProductVersion": "1.0.0.20250212",
         "SpecialBuild": ""
     },
     "VarFileInfo": {

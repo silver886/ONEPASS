@@ -10,7 +10,7 @@ import (
 
 const (
 	toolName    = "ONEPASS"
-	toolVersion = "0.0.1"
+	toolVersion = "1.0.0"
 
 	toolTitle = toolName + " " + toolVersion
 )
