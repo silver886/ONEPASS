@@ -1,5 +1,6 @@
 $projectName = 'ONEPASS'
 $projectVersion = '1.1.2'
+$projectEnv = 'mapleridge'
 
 $gui = $false
 $pack = $false
@@ -7,34 +8,43 @@ $pack = $false
 Push-Location $PSScriptRoot
 
 $timestamp = [Xml.XmlConvert]::ToString((Get-Date)) -replace '(\+|-|:|\.)', '' -replace '(Z|\d\d\d\d$)', ''
+$outputName = "$($projectName)_$($projectVersion)_$($timestamp)_{{OS}}_{{ARCH}}"
 
-$outputName = "$($projectName)_$($projectVersion)_$timestamp"
+$cc = 'go'
+$cflags = ''
+$ldflags = "-s -w -X main.toolName=$projectName -X main.toolVersion=$projectVersion -X main.defaultCloudflaredVersion=$CLOUDFLARED_VERSION -X main.defaultRemote=$REMOTE -X main.defaultLocal=$LOCAL"
+if ($gui) {
+    $ldflags = "-H=windowsgui $ldflags"
+}
+if ($pack) {
+    $cc = 'packr'
+}
 
-goversioninfo -64 -o "$projectName.syso" "$projectName.json"
-
-dotenvx get --overload --strict -f .\.env.mapleridge --format=eval | ForEach-Object {
+dotenvx get --overload --strict "--env-file=.env.$projectEnv" --format=eval | ForEach-Object {
     Invoke-Expression -Command "`$$_"
 }
 
-if ($gui) {
-    if ($pack) {
-        packr build -o "$outputName.exe" -ldflags="-H=windowsgui -s -w -X main.toolName=$projectName -X main.toolVersion=$projectVersion -X main.defaultCloudflaredVersion=$CLOUDFLARED_VERSION -X main.defaultRemote=$REMOTE -X main.defaultLocal=$LOCAL"
-    }
-    else {
-        go build -o "$outputName.exe" -ldflags="-H=windowsgui -s -w -X main.toolName=$projectName -X main.toolVersion=$projectVersion -X main.defaultCloudflaredVersion=$CLOUDFLARED_VERSION -X main.defaultRemote=$REMOTE -X main.defaultLocal=$LOCAL"
-    }
-}
-else {
-    if ($pack) {
-        packr build -o "$outputName.exe" -ldflags="-s -w -X main.toolName=$projectName -X main.toolVersion=$projectVersion -X main.defaultCloudflaredVersion=$CLOUDFLARED_VERSION -X main.defaultRemote=$REMOTE -X main.defaultLocal=$LOCAL"
-    }
-    else {
-        go build -o "$outputName.exe" -ldflags="-s -w -X main.toolName=$projectName -X main.toolVersion=$projectVersion -X main.defaultCloudflaredVersion=$CLOUDFLARED_VERSION -X main.defaultRemote=$REMOTE -X main.defaultLocal=$LOCAL"
-    }
+& {
+    $os = 'windows'
+    $arch = 'amd64'
+    $tempOutputName = $outputName.Replace('{{OS}}', $os).Replace('{{ARCH}}', $arch)
+    $cflags = "-o=$tempOutputName.exe $cflags"
+
+    goversioninfo -64 -o "$projectName.syso" "$projectName.json"
+    env "GOOS=$os" "GOARCH=$arch" "$cc" build "$cflags" "-ldflags=$ldflags"
+
+    Remove-Item -Path "$projectName.syso"
+    upx --ultra-brute "$tempOutputName.exe"
+    Copy-Item "$tempOutputName.exe" "$($tempOutputName.Replace("_$timestamp", '')).exe"
 }
 
-Remove-Item -Path "$projectName.syso"
+& {
+    $os = 'darwin'
+    $arch = 'arm64'
+    $tempOutputName = $outputName.Replace('{{OS}}', $os).Replace('{{ARCH}}', $arch)
+    $cflags = "-o=$tempOutputName $cflags"
 
-upx --ultra-brute "$outputName.exe"
+    env "GOOS=$os" "GOARCH=$arch" "$cc" build "$cflags" "-ldflags=$ldflags"
 
-Copy-Item "$outputName.exe" "$projectName.exe"
+    Copy-Item "$tempOutputName" "$($tempOutputName.Replace("_$timestamp", ''))"
+}
