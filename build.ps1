@@ -1,6 +1,6 @@
 $projectName = 'ONEPASS'
-$projectVersion = '1.1.2'
-$projectEnv = 'mapleridge'
+$projectVersion = '1.2.0'
+$projectEnv = 'bcit-comp-2800'
 
 $gui = $false
 $pack = $false
