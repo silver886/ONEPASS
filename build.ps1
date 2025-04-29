@@ -48,3 +48,14 @@ if ($pack) {
 
     Copy-Item "$tempOutputName" "$($tempOutputName.Replace("_$timestamp", ''))"
 }
+
+& {
+    $os = 'linux'
+    $arch = 'amd64'
+    $tempOutputName = $outputName.Replace('{{OS}}', $os).Replace('{{ARCH}}', $arch)
+    $cflags = "-o=$tempOutputName $cflags"
+
+    env "GOOS=$os" "GOARCH=$arch" "$cc" build "$cflags" "-ldflags=$ldflags"
+
+    Copy-Item "$tempOutputName" "$($tempOutputName.Replace("_$timestamp", ''))"
+}
